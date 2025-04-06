@@ -4,6 +4,7 @@ use zero2prod::{configuration::get_configuration, startup::run};
 
 #[tokio::main]
 async fn main() -> std::io::Result<()> {
+    env_logger::Builder::from_env(env_logger::Env::default().default_filter_or("info")).init();
     let configuration = get_configuration().expect("Failed to read configuration"); //从文件中获取配置
                                                                                     //获取数据库连接
     let connection_pool = PgPool::connect(&configuration.database.connection_string())
